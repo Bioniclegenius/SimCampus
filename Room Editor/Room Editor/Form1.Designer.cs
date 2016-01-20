@@ -102,6 +102,7 @@
       this.ZoomIn.TabIndex = 4;
       this.ZoomIn.Text = "+";
       this.ZoomIn.UseVisualStyleBackColor = true;
+      this.ZoomIn.Click += new System.EventHandler(this.ZoomIn_Click);
       // 
       // ZoomOut
       // 
@@ -112,6 +113,7 @@
       this.ZoomOut.TabIndex = 5;
       this.ZoomOut.Text = "-";
       this.ZoomOut.UseVisualStyleBackColor = true;
+      this.ZoomOut.Click += new System.EventHandler(this.ZoomOut_Click);
       // 
       // menuStrip1
       // 
@@ -271,10 +273,13 @@
       this.Controls.Add(this.NodeTool);
       this.Controls.Add(this.LineTool);
       this.Controls.Add(this.menuStrip1);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+      this.MaximizeBox = false;
       this.Name = "Form1";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
+      this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.ResumeLayout(false);
