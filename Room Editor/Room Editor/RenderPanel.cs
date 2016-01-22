@@ -12,7 +12,19 @@ namespace Room_Editor {
     float cx,cy,zoom;
     float mx,my;
     const int BARSPACE=20;
-
+    const int MAXZOOMLEVEL=4;
+    const int MINZOOMLEVEL=4;
+    //We need to move the room edit buttons to this panel, since this panel
+    //should be controlling everything about room editting.
+    //Furthermore, floor editting and so on will have different sets of buttons.
+    //Things need to be localized.
+    //As further reason, this class needs to be able to read what button is
+    //selected, and adjust as necessary. Therefore...
+    //
+    //This also allows us to put a keyboard listener in here, as opposed to on
+    //the form itself. I'm all for making things less global. Means less work on
+    //the form and easier switching between different editors, since they handle
+    //everything necessary for themselves on their own.
     public RenderPanel(int x,int y,int w,int h) {
       this.Location=new Point(x,y);
       this.Width=w;
@@ -24,7 +36,7 @@ namespace Room_Editor {
       my=this.Height/2;
       cx=0;
       cy=0;
-      zoom=2;
+      zoom=1;
       Invalidate();
     }
 
@@ -39,34 +51,45 @@ namespace Room_Editor {
     }
 
     private void snapTo() {
-      mx-=mx-(int)((mx/(1f/zoom)))*1f/zoom;
-      /*if(mx>=0) {
-        float mxC=mx-(int)((mx/(1f/zoom)))*1f/zoom;
-        mxC*=zoom;
-        if(mxC<1f/(zoom)) {
-          mx-=mxC/zoom;
-        }
-        else
-          mx+=1/zoom-mxC/zoom;
-      }
-      if(my>=0) {
-        float myC=my-(int)((my/(1f/zoom)))*1f/zoom;
-        myC*=zoom;
-        if(myC<1f/(zoom)) {
-          my-=myC/zoom;
-        }
-        else
-          my+=1f/zoom-myC/zoom;
-      }*/
+      float mxC=mx*zoom;
+      if(mxC<0)
+        mxC*=-1;
+      int mxCI=(int)(mxC);
+      mxC-=mxCI;
+      if(mxC<.5)
+        mxC=0;
+      else
+        mxC=1;
+      mxC+=mxCI;
+      mxC/=zoom;
+      if(mx<0)
+        mx=-mxC;
+      else
+        mx=mxC;
+      float myC=my*zoom;
+      if(myC<0)
+        myC*=-1;
+      int myCI=(int)(myC);
+      myC-=myCI;
+      if(myC<.5)
+        myC=0;
+      else
+        myC=1;
+      myC+=myCI;
+      myC/=zoom;
+      if(my<0)
+        my=-myC;
+      else
+        my=myC;
     }
 
     public void zoomIn() {
-      if(zoom<16)
+      if(zoom<Math.Pow(2,MAXZOOMLEVEL))
         zoom*=2;
     }
 
     public void zoomOut() {
-      if(zoom>.0625)
+      if(zoom>1f/Math.Pow(2,MINZOOMLEVEL))
         zoom/=2;
     }
 
@@ -133,13 +156,15 @@ namespace Room_Editor {
 
       b.Color=Color.FromArgb(160,160,160);//Coordinate Display
 
-      g.FillRectangle(b,0,this.Height-33,129,33);//Border
-      b.Color=Color.FromArgb(15,15,15);
-      g.FillRectangle(b,0,this.Height-32,128,32);//Internal Box
-
+      string coordinateOutput=Convert.ToString(mx)+","+Convert.ToString(my);
       Font f=new Font("Arial",16);//Coordinate Drawing
+      SizeF coordSize=g.MeasureString(coordinateOutput,f);
+
+      g.FillRectangle(b,0,this.Height-coordSize.Height-2,coordSize.Width+2,coordSize.Height+2);//Border
+      b.Color=Color.FromArgb(15,15,15);
+      g.FillRectangle(b,0,this.Height-coordSize.Height-1,coordSize.Width+1,coordSize.Height+1);//Internal Box
       b.Color=Color.FromArgb(160,160,160);
-      g.DrawString(Convert.ToString(mx)+","+Convert.ToString(my),f,b,new PointF(2,this.Height-30));
+      g.DrawString(coordinateOutput,f,b,new PointF(2,this.Height-coordSize.Height));//text
 
 
       Invalidate();
