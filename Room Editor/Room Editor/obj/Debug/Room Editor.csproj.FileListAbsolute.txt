@@ -7,3 +7,6 @@ C:\Users\David\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room
 C:\Users\David\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.csproj.GenerateResource.Cache
 C:\Users\David\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.exe
 C:\Users\David\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.pdb
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\bin\Debug\Room Editor.exe.config
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.exe
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.pdb
