@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Room_Editor {
-  public class RenderPanel:Panel {
+  public class RoomEditor:Panel {
 
     float cx,cy,zoom;
     float mx,my;
@@ -25,7 +25,7 @@ namespace Room_Editor {
     //the form itself. I'm all for making things less global. Means less work on
     //the form and easier switching between different editors, since they handle
     //everything necessary for themselves on their own.
-    public RenderPanel(int x,int y,int w,int h) {
+    public RoomEditor(int x,int y,int w,int h) {
       this.Location=new Point(x,y);
       this.Width=w;
       this.Height=h;

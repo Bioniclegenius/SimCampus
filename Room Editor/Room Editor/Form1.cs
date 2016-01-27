@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace Room_Editor {
   public partial class Form1:Form {
 
-    public RenderPanel p;
+    public RoomEditor p;
     public Form1() {
       InitializeComponent();
     }
@@ -22,7 +22,7 @@ namespace Room_Editor {
       ZoomIn.Location=new Point(this.ClientSize.Width-ZoomIn.Width,LineTool.Location.Y);
       ZoomOut.Location=new Point(ZoomIn.Location.X-ZoomOut.Width,ZoomIn.Location.Y);
 
-      p=new RenderPanel(0,ZoomIn.Bottom,this.ClientSize.Width,this.ClientSize.Height-ZoomIn.Bottom);
+      p=new RoomEditor(0,ZoomIn.Bottom,this.ClientSize.Width,this.ClientSize.Height-ZoomIn.Bottom);
       this.Controls.Add(p);
     }
 
