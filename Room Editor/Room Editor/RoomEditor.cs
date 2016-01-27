@@ -45,7 +45,7 @@ namespace Room_Editor {
       cy=0;
       zoom=1;
       clickC=new PointF();
-      r=new Room("test","nada");
+      r=new Room("test");
       Invalidate();
     }
 
@@ -124,6 +124,10 @@ namespace Room_Editor {
           clickStage=true;
           clickC=new PointF(mx,my);
         }
+        else {
+          r.addLine(clickC.X,clickC.Y,mx,my);
+          clickStage=false;
+        }
       }
     }
 
@@ -142,7 +146,9 @@ namespace Room_Editor {
       SolidBrush b=new SolidBrush(Color.FromArgb(0,0,0));
       g.FillRectangle(b,0,0,this.Width,this.Height);//Background Filling
 
-      int zoompoint=1;
+      int zoompoint=4;
+      if(zoom>4)
+        zoompoint=1;
       if(zoom<=1)
         zoompoint=16;
       if(zoom<=.125)
@@ -183,8 +189,12 @@ namespace Room_Editor {
       g.FillEllipse(b,toScreenW(mx)-3,toScreenH(my)-3,6,6);//mouse locator
 
       //Draw Room
-
+      b.Color=Color.FromArgb(255,64,64);
+      Pen p=new Pen(b.Color);
+      p.Width=2;
       for(int x=0;x<r.lines.Count;x++) {
+        g.DrawLine(p,toScreenW(r.lines[x][0].X),toScreenH(r.lines[x][0].Y),
+                                    toScreenW(r.lines[x][1].X),toScreenH(r.lines[x][1].Y));
       }
 
       //Extra Renderings
