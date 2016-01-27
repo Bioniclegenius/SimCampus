@@ -45,7 +45,7 @@ namespace Room_Editor {
       cy=0;
       zoom=1;
       clickC=new PointF();
-      r=new Room("test");
+      r=new Room("test","nada");
       Invalidate();
     }
 
@@ -182,12 +182,19 @@ namespace Room_Editor {
       b.Color=Color.FromArgb(255,255,255);
       g.FillEllipse(b,toScreenW(mx)-3,toScreenH(my)-3,6,6);//mouse locator
 
+      //Draw Room
+
+      for(int x=0;x<r.lines.Count;x++) {
+      }
+
       //Extra Renderings
 
       if(toolSel==1&&clickStage) {
         b.Color=Color.FromArgb(255,255,255);
         g.DrawLine(new Pen(b.Color),toScreenW(clickC.X),toScreenH(clickC.Y),toScreenW(mx),toScreenH(my));
       }
+
+      //End Extra Renderings
 
       b.Color=Color.FromArgb(160,160,160);//Coordinate Display
 

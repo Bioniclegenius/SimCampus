@@ -10,14 +10,13 @@ namespace Room_Editor
     class Room
     {
         private string name;
-        private List<PointF[]> lines = new List<PointF[]>();
+        public List<PointF[]> lines = new List<PointF[]>();
         private List<Node> nodes = new List<Node>();
 
 
-        public Room(string name, string fileName)
+        public Room(string name)
         {
             this.name = name;
-            build(fileName);
         }
 
         public void addLine(float x1, float y1, float x2, float y2)
@@ -63,7 +62,7 @@ namespace Room_Editor
             SolidBrush b = new SolidBrush(Color.FromArgb(196, 196, 196));
         }
 
-        public void load(string fileName)
+        public void loadFile(string fileName)
         {
             string[] fileLines = System.IO.File.ReadAllLines(fileName);
 
