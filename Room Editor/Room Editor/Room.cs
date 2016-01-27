@@ -26,16 +26,48 @@ namespace Room_Editor
             lines.Add(a);
         }
 
+        public void addNode(Node n)
+        {
+            nodes.Add(n);
+        }
+
+        public bool addConnection(Node n1, Node n2)
+        {
+            bool success = false;
+            if (nodes.Contains(n1) == true && nodes.Contains(n2) == true)
+            {
+                n1.addConnection(n2);
+                n2.addConnection(n1);
+                success = true;
+            }
+
+            return success;
+        }
+
+        public void saveFile(String fileLocation)
+        {
+            System.IO.StreamWriter file = new System.IO.StreamWriter(fileLocation);
+            foreach (Node n in nodes)
+            {
+                file.WriteLine(n);
+            }
+            foreach (PointF[] f in lines)
+            {
+                file.WriteLine("L " + f[0].X + " " + f[0].Y + " " + f[1].X + " " + f[1].Y);
+            }
+
+        }
+
         public void render(Graphics g,float ang, float cx, float cy, int w, int h)
         {
             SolidBrush b = new SolidBrush(Color.FromArgb(196, 196, 196));
         }
 
-        public void build(string fileName)
+        public void load(string fileName)
         {
-            string[] lines = System.IO.File.ReadAllLines(fileName);
+            string[] fileLines = System.IO.File.ReadAllLines(fileName);
 
-            for(int x = 1; x < lines.Length; x++)
+            for(int x = 1; x < fileLines.Length; x++)
             {
                 /* 
                  * if(node)
