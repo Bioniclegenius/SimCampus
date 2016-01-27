@@ -14,6 +14,10 @@ namespace Room_Editor {
     const int BARSPACE=20;
     const int MAXZOOMLEVEL=4;
     const int MINZOOMLEVEL=4;
+    bool clickStage;
+    PointF clickC;
+    int toolSel;
+    Room r;
     //We need to move the room edit buttons to this panel, since this panel
     //should be controlling everything about room editting.
     //Furthermore, floor editting and so on will have different sets of buttons.
@@ -32,11 +36,16 @@ namespace Room_Editor {
       this.DoubleBuffered=true;
       this.Paint+=new PaintEventHandler(this.paintEvent);
       this.MouseMove+=new MouseEventHandler(this.mouseMove);
+      this.MouseClick+=new MouseEventHandler(this.mouseClick);
+      clickStage=false;
+      toolSel=1;
       mx=this.Width/2;
       my=this.Height/2;
       cx=0;
       cy=0;
       zoom=1;
+      clickC=new PointF();
+      r=new Room("test");
       Invalidate();
     }
 
@@ -109,6 +118,25 @@ namespace Room_Editor {
       cy-=1/zoom;
     }
 
+    public void mouseClick(Object sender,MouseEventArgs e) {
+      if(toolSel==1) {
+        if(!clickStage) {
+          clickStage=true;
+          clickC=new PointF(mx,my);
+        }
+      }
+    }
+
+    public int toScreenW(float num) {
+      int goal=(int)(this.Width/2+num*zoom*BARSPACE+.5);
+      return goal;
+    }
+
+    public int toScreenH(float num) {
+      int goal=(int)(this.Height/2-num*zoom*BARSPACE+.5);
+      return goal;
+    }
+
     public void paintEvent(Object sender,PaintEventArgs e) {
       Graphics g=e.Graphics;
       SolidBrush b=new SolidBrush(Color.FromArgb(0,0,0));
@@ -152,7 +180,14 @@ namespace Room_Editor {
         g.FillRectangle(b,0,this.Height/2+BARSPACE*y,this.Width,1);
       }
       b.Color=Color.FromArgb(255,255,255);
-      g.FillEllipse(b,this.Width/2+mx*zoom*BARSPACE-3,this.Height/2-my*zoom*BARSPACE-3,6,6);
+      g.FillEllipse(b,toScreenW(mx)-3,toScreenH(my)-3,6,6);//mouse locator
+
+      //Extra Renderings
+
+      if(toolSel==1&&clickStage) {
+        b.Color=Color.FromArgb(255,255,255);
+        g.DrawLine(new Pen(b.Color),toScreenW(clickC.X),toScreenH(clickC.Y),toScreenW(mx),toScreenH(my));
+      }
 
       b.Color=Color.FromArgb(160,160,160);//Coordinate Display
 
