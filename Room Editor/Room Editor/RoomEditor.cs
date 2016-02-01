@@ -65,6 +65,9 @@ namespace Room_Editor {
       toolSel=tool;
     }
 
+    public void keyPress(Object sender,KeyPressEventArgs e) {
+    }
+
     private void snapTo() {
       float mxC=mx*zoom;
       if(mxC<0)
@@ -132,7 +135,7 @@ namespace Room_Editor {
         }
         else {
           r.addLine(clickC.X,clickC.Y,mx,my);
-          //r.saveFile();
+          r.saveFile();
           clickStage=false;
         }
       }

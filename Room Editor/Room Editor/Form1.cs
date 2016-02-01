@@ -49,5 +49,12 @@ namespace Room_Editor {
     private void NodeTool_Click(object sender,EventArgs e) {
       p.selectTool(2);
     }
+
+    public void Form1_KeyPress(object sender,KeyPressEventArgs e) {
+      if(e.KeyChar==(int)('1'))
+        LineTool.PerformClick();
+      p.selectTool(2);
+      e.Handled=true;
+    }
   }
 }
