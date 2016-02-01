@@ -23,6 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
       this.LineTool = new System.Windows.Forms.Button();
       this.NodeTool = new System.Windows.Forms.Button();
       this.NodeConnTool = new System.Windows.Forms.Button();
@@ -31,87 +32,88 @@
       this.ZoomOut = new System.Windows.Forms.Button();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.buildingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.campusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.roomToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.floorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.buildingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.campusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.floorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.buildingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.campusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.reCenterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.reCenterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
       // LineTool
       // 
+      this.LineTool.Image = ((System.Drawing.Image)(resources.GetObject("LineTool.Image")));
       this.LineTool.Location = new System.Drawing.Point(0, 24);
       this.LineTool.Margin = new System.Windows.Forms.Padding(0);
       this.LineTool.Name = "LineTool";
       this.LineTool.Size = new System.Drawing.Size(32, 32);
       this.LineTool.TabIndex = 0;
-      this.LineTool.Text = "/";
       this.LineTool.UseVisualStyleBackColor = true;
+      this.LineTool.Click += new System.EventHandler(this.LineTool_Click);
       // 
       // NodeTool
       // 
+      this.NodeTool.Image = ((System.Drawing.Image)(resources.GetObject("NodeTool.Image")));
       this.NodeTool.Location = new System.Drawing.Point(32, 24);
       this.NodeTool.Margin = new System.Windows.Forms.Padding(0);
       this.NodeTool.Name = "NodeTool";
       this.NodeTool.Size = new System.Drawing.Size(32, 32);
       this.NodeTool.TabIndex = 1;
-      this.NodeTool.Text = "O";
       this.NodeTool.UseVisualStyleBackColor = true;
       this.NodeTool.Click += new System.EventHandler(this.NodeTool_Click);
       // 
       // NodeConnTool
       // 
+      this.NodeConnTool.Image = ((System.Drawing.Image)(resources.GetObject("NodeConnTool.Image")));
       this.NodeConnTool.Location = new System.Drawing.Point(64, 24);
       this.NodeConnTool.Margin = new System.Windows.Forms.Padding(0);
       this.NodeConnTool.Name = "NodeConnTool";
       this.NodeConnTool.Size = new System.Drawing.Size(32, 32);
       this.NodeConnTool.TabIndex = 2;
-      this.NodeConnTool.Text = "O/";
       this.NodeConnTool.UseVisualStyleBackColor = true;
       // 
       // DelTool
       // 
+      this.DelTool.Image = ((System.Drawing.Image)(resources.GetObject("DelTool.Image")));
       this.DelTool.Location = new System.Drawing.Point(96, 24);
       this.DelTool.Margin = new System.Windows.Forms.Padding(0);
       this.DelTool.Name = "DelTool";
       this.DelTool.Size = new System.Drawing.Size(32, 32);
       this.DelTool.TabIndex = 3;
-      this.DelTool.Text = "X";
       this.DelTool.UseVisualStyleBackColor = true;
       // 
       // ZoomIn
       // 
+      this.ZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomIn.Image")));
       this.ZoomIn.Location = new System.Drawing.Point(751, 24);
       this.ZoomIn.Margin = new System.Windows.Forms.Padding(0);
       this.ZoomIn.Name = "ZoomIn";
       this.ZoomIn.Size = new System.Drawing.Size(32, 32);
       this.ZoomIn.TabIndex = 4;
-      this.ZoomIn.Text = "+";
       this.ZoomIn.UseVisualStyleBackColor = true;
       this.ZoomIn.Click += new System.EventHandler(this.ZoomIn_Click);
       // 
       // ZoomOut
       // 
+      this.ZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("ZoomOut.Image")));
       this.ZoomOut.Location = new System.Drawing.Point(719, 24);
       this.ZoomOut.Margin = new System.Windows.Forms.Padding(0);
       this.ZoomOut.Name = "ZoomOut";
       this.ZoomOut.Size = new System.Drawing.Size(32, 32);
       this.ZoomOut.TabIndex = 5;
-      this.ZoomOut.Text = "-";
       this.ZoomOut.UseVisualStyleBackColor = true;
       this.ZoomOut.Click += new System.EventHandler(this.ZoomOut_Click);
       // 
@@ -142,19 +144,40 @@
       this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 24);
       this.fileToolStripMenuItem.Text = "File";
       // 
-      // viewToolStripMenuItem
+      // newToolStripMenuItem
       // 
-      this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reCenterToolStripMenuItem});
-      this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-      this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-      this.viewToolStripMenuItem.Text = "View";
+      this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.roomToolStripMenuItem1,
+            this.floorToolStripMenuItem1,
+            this.buildingToolStripMenuItem1,
+            this.campusToolStripMenuItem1});
+      this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+      this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+      this.newToolStripMenuItem.Text = "New";
       // 
-      // editToolStripMenuItem
+      // roomToolStripMenuItem1
       // 
-      this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-      this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 24);
-      this.editToolStripMenuItem.Text = "Edit";
+      this.roomToolStripMenuItem1.Name = "roomToolStripMenuItem1";
+      this.roomToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+      this.roomToolStripMenuItem1.Text = "Room";
+      // 
+      // floorToolStripMenuItem1
+      // 
+      this.floorToolStripMenuItem1.Name = "floorToolStripMenuItem1";
+      this.floorToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+      this.floorToolStripMenuItem1.Text = "Floor";
+      // 
+      // buildingToolStripMenuItem1
+      // 
+      this.buildingToolStripMenuItem1.Name = "buildingToolStripMenuItem1";
+      this.buildingToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+      this.buildingToolStripMenuItem1.Text = "Building";
+      // 
+      // campusToolStripMenuItem1
+      // 
+      this.campusToolStripMenuItem1.Name = "campusToolStripMenuItem1";
+      this.campusToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+      this.campusToolStripMenuItem1.Text = "Campus";
       // 
       // openToolStripMenuItem
       // 
@@ -164,102 +187,81 @@
             this.buildingToolStripMenuItem,
             this.campusToolStripMenuItem});
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.openToolStripMenuItem.Text = "Open";
       // 
       // roomToolStripMenuItem
       // 
       this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-      this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.roomToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
       this.roomToolStripMenuItem.Text = "Room";
       // 
       // floorToolStripMenuItem
       // 
       this.floorToolStripMenuItem.Name = "floorToolStripMenuItem";
-      this.floorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.floorToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
       this.floorToolStripMenuItem.Text = "Floor";
       // 
       // buildingToolStripMenuItem
       // 
       this.buildingToolStripMenuItem.Name = "buildingToolStripMenuItem";
-      this.buildingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.buildingToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
       this.buildingToolStripMenuItem.Text = "Building";
       // 
       // campusToolStripMenuItem
       // 
       this.campusToolStripMenuItem.Name = "campusToolStripMenuItem";
-      this.campusToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.campusToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
       this.campusToolStripMenuItem.Text = "Campus";
       // 
-      // newToolStripMenuItem
+      // toolStripSeparator2
       // 
-      this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.roomToolStripMenuItem1,
-            this.floorToolStripMenuItem1,
-            this.buildingToolStripMenuItem1,
-            this.campusToolStripMenuItem1});
-      this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-      this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-      this.newToolStripMenuItem.Text = "New";
-      // 
-      // roomToolStripMenuItem1
-      // 
-      this.roomToolStripMenuItem1.Name = "roomToolStripMenuItem1";
-      this.roomToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-      this.roomToolStripMenuItem1.Text = "Room";
-      // 
-      // floorToolStripMenuItem1
-      // 
-      this.floorToolStripMenuItem1.Name = "floorToolStripMenuItem1";
-      this.floorToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-      this.floorToolStripMenuItem1.Text = "Floor";
-      // 
-      // buildingToolStripMenuItem1
-      // 
-      this.buildingToolStripMenuItem1.Name = "buildingToolStripMenuItem1";
-      this.buildingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-      this.buildingToolStripMenuItem1.Text = "Building";
-      // 
-      // campusToolStripMenuItem1
-      // 
-      this.campusToolStripMenuItem1.Name = "campusToolStripMenuItem1";
-      this.campusToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-      this.campusToolStripMenuItem1.Text = "Campus";
+      this.toolStripSeparator2.Name = "toolStripSeparator2";
+      this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
       // 
       // saveToolStripMenuItem
       // 
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.saveToolStripMenuItem.Text = "Save";
       // 
       // saveAsToolStripMenuItem
       // 
       this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-      this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.saveAsToolStripMenuItem.Text = "Save As";
-      // 
-      // reCenterToolStripMenuItem
-      // 
-      this.reCenterToolStripMenuItem.Name = "reCenterToolStripMenuItem";
-      this.reCenterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-      this.reCenterToolStripMenuItem.Text = "Re-Center";
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(111, 6);
       // 
       // quitToolStripMenuItem
       // 
       this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-      this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.quitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.quitToolStripMenuItem.Text = "Quit";
       this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
       // 
-      // toolStripSeparator2
+      // viewToolStripMenuItem
       // 
-      this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+      this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reCenterToolStripMenuItem});
+      this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+      this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+      this.viewToolStripMenuItem.Text = "View";
+      // 
+      // reCenterToolStripMenuItem
+      // 
+      this.reCenterToolStripMenuItem.Name = "reCenterToolStripMenuItem";
+      this.reCenterToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+      this.reCenterToolStripMenuItem.Text = "Re-Center";
+      // 
+      // editToolStripMenuItem
+      // 
+      this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+      this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 24);
+      this.editToolStripMenuItem.Text = "Edit";
       // 
       // Form1
       // 

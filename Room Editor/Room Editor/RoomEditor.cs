@@ -14,12 +14,6 @@ namespace Room_Editor {
     const int BARSPACE=20;
     const int MAXZOOMLEVEL=4;
     const int MINZOOMLEVEL=4;
-    Button lineTool;
-    Button nodeTool;
-    Button nConTool;
-    Button DelTool;
-    Button ZoomIn;
-    Button ZoomOut;
     bool clickStage;
     PointF clickC;
     int toolSel;
@@ -44,20 +38,6 @@ namespace Room_Editor {
       this.MouseMove+=new MouseEventHandler(this.mouseMove);
       this.MouseClick+=new MouseEventHandler(this.mouseClick);
 
-      #region buttons
-      lineTool=new Button();
-      lineTool.Location=new Point(0,0);
-      lineTool.Size=new Size(32,32);
-      lineTool.Image=Image.FromFile("linetool.png");
-      this.Controls.Add(lineTool);
-
-      nodeTool=new Button();
-      nodeTool.Location=new Point(32,0);
-      nodeTool.Size=new Size(32,32);
-      nodeTool.Image=Image.FromFile("linetool.png");
-      this.Controls.Add(nodeTool);
-      #endregion
-
       clickStage=false;
       toolSel=1;
       mx=this.Width/2;
@@ -68,7 +48,6 @@ namespace Room_Editor {
       clickC=new PointF();
       r=new Room("test");
       Invalidate();
-      lineTool.PerformClick();
     }
 
     private void mouseMove(Object sender,MouseEventArgs e) {
@@ -79,6 +58,11 @@ namespace Room_Editor {
       mx=(mousex-this.Width/2)/zoom/BARSPACE;
       my=(this.Height/2-mousey)/zoom/BARSPACE;
       snapTo();
+    }
+
+    public void selectTool(int tool) {
+      clickStage=false;
+      toolSel=tool;
     }
 
     private void snapTo() {
@@ -148,7 +132,7 @@ namespace Room_Editor {
         }
         else {
           r.addLine(clickC.X,clickC.Y,mx,my);
-          r.saveFile();
+          //r.saveFile();
           clickStage=false;
         }
       }
@@ -241,8 +225,16 @@ namespace Room_Editor {
       b.Color=Color.FromArgb(160,160,160);
       g.DrawString(coordinateOutput,f,b,new PointF(2,this.Height-coordSize.Height));//text
 
-
+      foreach(var x in this.Controls.OfType<Button>()) {
+        x.Invalidate();
+      }
       Invalidate();
+    }
+
+    private void InitializeComponent() {
+      this.SuspendLayout();
+      this.ResumeLayout(false);
+
     }
   }
 }
