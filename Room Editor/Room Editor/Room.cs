@@ -38,7 +38,7 @@ namespace Room_Editor {
             return success;
         }
 
-        public void saveFile(){
+        public void saveFile() {
             System.IO.FileStream file;
             if(location == null || location == "") {
                 SaveFileDialog d = new SaveFileDialog();
@@ -49,12 +49,12 @@ namespace Room_Editor {
                 if(d.ShowDialog() == DialogResult.OK)
                     file = (System.IO.FileStream)d.OpenFile();
                 else
-                    file = new System.IO.FileStream("", System.IO.FileMode.Create);
+                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);
                 location = d.FileName;
             } else {
                 try {
                     file = new System.IO.FileStream(location, System.IO.FileMode.Create);
-                } catch (Exception e){
+                } catch(Exception e) {
                     file = new System.IO.FileStream("", System.IO.FileMode.Create);
                 } finally {
 
