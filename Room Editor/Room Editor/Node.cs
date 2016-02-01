@@ -41,7 +41,7 @@ namespace Room_Editor
                 theString += n.getNumber() + " ";
             }
 
-            return theString;
+            return theString + "\n";
         }
     }
 }

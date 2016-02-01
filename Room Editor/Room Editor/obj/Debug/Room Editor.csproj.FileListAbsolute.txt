@@ -10,3 +10,9 @@ C:\Users\David\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room
 C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\bin\Debug\Room Editor.exe.config
 C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.exe
 C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.pdb
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.csprojResolveAssemblyReference.cache
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room_Editor.Form1.resources
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room_Editor.Properties.Resources.resources
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\obj\Debug\Room Editor.csproj.GenerateResource.Cache
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\bin\Debug\Room Editor.exe
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Room Editor\Room Editor\bin\Debug\Room Editor.pdb
