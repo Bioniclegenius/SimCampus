@@ -183,6 +183,22 @@ namespace Room_Editor {
       cy-=1/zoom;
     }
 
+    public void removeOnLine(float error) {
+      for(int x=r.lines.Count-1;x>=0;x--) {
+        double x1=r.lines[x][0].X;
+        double y1=r.lines[x][0].Y;
+        double x2=r.lines[x][1].X;
+        double y2=r.lines[x][1].Y;
+        double AB=Math.Sqrt(Math.Pow(x2-x1,2)+Math.Pow(y2-y1,2));
+        double AP=Math.Sqrt(Math.Pow(x1-mx,2)+Math.Pow(y1-my,2));
+        double PB=Math.Sqrt(Math.Pow(mx-x2,2)+Math.Pow(my-y2,2));
+        if(AP+PB-AB<=error) {
+          r.lines.RemoveAt(x);
+          break;
+        }
+      }
+    }
+
     public void mouseClick(Object sender,MouseEventArgs e) {
       if(toolSel==1) {
         if(clickStage==0) {
@@ -192,6 +208,9 @@ namespace Room_Editor {
         else if(clickStage==1) {
           r.addLine(clickC.X,clickC.Y,mx,my);
           clickStage=0;
+        }
+        else {
+          removeOnLine(1/zoom/20);
         }
       }
     }
