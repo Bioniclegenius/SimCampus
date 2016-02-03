@@ -97,7 +97,8 @@ namespace Room_Editor {
     public void mouseCalc(int mousex,int mousey) {
       mx=(mousex-this.Width/2)/zoom/BARSPACE;
       my=(this.Height/2-mousey)/zoom/BARSPACE;
-      snapTo();
+      if(clickStage!=-1)
+        snapTo();
     }
 
     public void selectTool(int tool) {

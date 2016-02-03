@@ -50,3 +50,6 @@ Room Editor/Room Editor/bin/Debug/Room Editor.exe
 *.pdb
 Room Editor/Room Editor/bin/Debug/Room Editor.vshost.exe
 *.exe
+Room Editor/Room Editor/bin/Debug/Room Editor.exe
+*.pdb
+Room Editor/Room Editor/obj/Debug/Room Editor.pdb
