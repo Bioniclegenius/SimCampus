@@ -12,7 +12,7 @@ namespace Room_Editor {
         private List<Node> nodes = new List<Node>();
 
 
-        public Room(string name) {
+        public Room(string name = "") {
             this.name = name;
         }
 
@@ -38,7 +38,7 @@ namespace Room_Editor {
 
         public void saveFile() {
             System.IO.FileStream file;
-            if(location == null || location == "") {
+            if(location == null || location.Equals("")) {
                 SaveFileDialog d = new SaveFileDialog();
                 d.Filter = "Room | *.rm";
                 d.FilterIndex = 1;
@@ -47,26 +47,22 @@ namespace Room_Editor {
                 if(d.ShowDialog() == DialogResult.OK)
                     file = (System.IO.FileStream)d.OpenFile();
                 else
-                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);
+                    file = new System.IO.FileStream("", System.IO.FileMode.Create);//This will never be reached
                 location = d.FileName;
             } else {
-                try {
-                    file = new System.IO.FileStream(location, System.IO.FileMode.Create);
-                } catch(Exception e) {
-                    file = new System.IO.FileStream("", System.IO.FileMode.Create);
-                } finally {
-
+                file = new System.IO.FileStream(location, System.IO.FileMode.Create);
+            }
+            if(location == null || location.Equals("")) {
+                foreach(Node n in nodes) {
+                    byte[] line = new UTF8Encoding(true).GetBytes(n.toString());
+                    file.Write(line, 0, line.Length);
                 }
+                foreach(PointF[] f in lines) {
+                    byte[] line = new UTF8Encoding(true).GetBytes("L " + f[0].X + " " + f[0].Y + " " + f[1].X + " " + f[1].Y + "\n");
+                    file.Write(line, 0, line.Length);
+                }
+                file.Close();
             }
-            foreach(Node n in nodes) {
-                byte[] line = new UTF8Encoding(true).GetBytes(n.toString());
-                file.Write(line, 0, line.Length);
-            }
-            foreach(PointF[] f in lines) {
-                byte[] line = new UTF8Encoding(true).GetBytes("L " + f[0].X + " " + f[0].Y + " " + f[1].X + " " + f[1].Y + "\n");
-                file.Write(line, 0, line.Length);
-            }
-            file.Close();
         }
 
         public void loadFile() {
@@ -74,18 +70,18 @@ namespace Room_Editor {
             ofd.Filter = "Room| *.rm";
             ofd.FilterIndex = 1;
             ofd.Title = "Open Room";
-            ofd.ShowDialog();
-            /*
-            string[] fileLines = System.IO.File.ReadAllLines(fileName);
+            if(ofd.ShowDialog() == DialogResult.OK) {
+                System.IO.StreamReader readIn = new System.IO.StreamReader(ofd.OpenFile());
+                location = ofd.FileName;
+                while(readIn.Peek() >= 0) {
+                    String line = readIn.ReadLine();
+                    if(line.Contains("l")) {
 
-            for(int x = 1;x < fileLines.Length;x++) {
-                /* 
-                 * if(node)
-                 *      lines.Add(new Node(lines[x]), name);
-                 * else if (line)
-                 *      something else
-                 * */
-            }
+                    } else if(line.Contains("n")) {
+
+                    }
+                }
+            } 
         }
     }
 }
