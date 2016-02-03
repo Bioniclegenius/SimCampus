@@ -23,13 +23,6 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-      this.LineTool = new System.Windows.Forms.Button();
-      this.NodeTool = new System.Windows.Forms.Button();
-      this.NodeConnTool = new System.Windows.Forms.Button();
-      this.DelTool = new System.Windows.Forms.Button();
-      this.ZoomIn = new System.Windows.Forms.Button();
-      this.ZoomOut = new System.Windows.Forms.Button();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,70 +45,6 @@
       this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // LineTool
-      // 
-      this.LineTool.Image = ((System.Drawing.Image)(resources.GetObject("LineTool.Image")));
-      this.LineTool.Location = new System.Drawing.Point(0, 24);
-      this.LineTool.Margin = new System.Windows.Forms.Padding(0);
-      this.LineTool.Name = "LineTool";
-      this.LineTool.Size = new System.Drawing.Size(32, 32);
-      this.LineTool.TabIndex = 0;
-      this.LineTool.UseVisualStyleBackColor = true;
-      this.LineTool.Click += new System.EventHandler(this.LineTool_Click);
-      // 
-      // NodeTool
-      // 
-      this.NodeTool.Image = ((System.Drawing.Image)(resources.GetObject("NodeTool.Image")));
-      this.NodeTool.Location = new System.Drawing.Point(32, 24);
-      this.NodeTool.Margin = new System.Windows.Forms.Padding(0);
-      this.NodeTool.Name = "NodeTool";
-      this.NodeTool.Size = new System.Drawing.Size(32, 32);
-      this.NodeTool.TabIndex = 1;
-      this.NodeTool.UseVisualStyleBackColor = true;
-      this.NodeTool.Click += new System.EventHandler(this.NodeTool_Click);
-      // 
-      // NodeConnTool
-      // 
-      this.NodeConnTool.Image = ((System.Drawing.Image)(resources.GetObject("NodeConnTool.Image")));
-      this.NodeConnTool.Location = new System.Drawing.Point(64, 24);
-      this.NodeConnTool.Margin = new System.Windows.Forms.Padding(0);
-      this.NodeConnTool.Name = "NodeConnTool";
-      this.NodeConnTool.Size = new System.Drawing.Size(32, 32);
-      this.NodeConnTool.TabIndex = 2;
-      this.NodeConnTool.UseVisualStyleBackColor = true;
-      // 
-      // DelTool
-      // 
-      this.DelTool.Image = ((System.Drawing.Image)(resources.GetObject("DelTool.Image")));
-      this.DelTool.Location = new System.Drawing.Point(96, 24);
-      this.DelTool.Margin = new System.Windows.Forms.Padding(0);
-      this.DelTool.Name = "DelTool";
-      this.DelTool.Size = new System.Drawing.Size(32, 32);
-      this.DelTool.TabIndex = 3;
-      this.DelTool.UseVisualStyleBackColor = true;
-      // 
-      // ZoomIn
-      // 
-      this.ZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("ZoomIn.Image")));
-      this.ZoomIn.Location = new System.Drawing.Point(751, 24);
-      this.ZoomIn.Margin = new System.Windows.Forms.Padding(0);
-      this.ZoomIn.Name = "ZoomIn";
-      this.ZoomIn.Size = new System.Drawing.Size(32, 32);
-      this.ZoomIn.TabIndex = 4;
-      this.ZoomIn.UseVisualStyleBackColor = true;
-      this.ZoomIn.Click += new System.EventHandler(this.ZoomIn_Click);
-      // 
-      // ZoomOut
-      // 
-      this.ZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("ZoomOut.Image")));
-      this.ZoomOut.Location = new System.Drawing.Point(719, 24);
-      this.ZoomOut.Margin = new System.Windows.Forms.Padding(0);
-      this.ZoomOut.Name = "ZoomOut";
-      this.ZoomOut.Size = new System.Drawing.Size(32, 32);
-      this.ZoomOut.TabIndex = 5;
-      this.ZoomOut.UseVisualStyleBackColor = true;
-      this.ZoomOut.Click += new System.EventHandler(this.ZoomOut_Click);
       // 
       // menuStrip1
       // 
@@ -187,14 +116,15 @@
             this.buildingToolStripMenuItem,
             this.campusToolStripMenuItem});
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
       this.openToolStripMenuItem.Text = "Open";
       // 
       // roomToolStripMenuItem
       // 
       this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-      this.roomToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+      this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
       this.roomToolStripMenuItem.Text = "Room";
+      this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
       // 
       // floorToolStripMenuItem
       // 
@@ -268,12 +198,6 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(784, 561);
-      this.Controls.Add(this.ZoomOut);
-      this.Controls.Add(this.ZoomIn);
-      this.Controls.Add(this.DelTool);
-      this.Controls.Add(this.NodeConnTool);
-      this.Controls.Add(this.NodeTool);
-      this.Controls.Add(this.LineTool);
       this.Controls.Add(this.menuStrip1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MaximizeBox = false;
@@ -281,7 +205,6 @@
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
-      this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
       this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
@@ -292,12 +215,6 @@
 
     #endregion
 
-    private System.Windows.Forms.Button LineTool;
-    private System.Windows.Forms.Button NodeTool;
-    private System.Windows.Forms.Button NodeConnTool;
-    private System.Windows.Forms.Button DelTool;
-    private System.Windows.Forms.Button ZoomIn;
-    private System.Windows.Forms.Button ZoomOut;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;

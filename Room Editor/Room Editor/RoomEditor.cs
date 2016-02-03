@@ -14,10 +14,16 @@ namespace Room_Editor {
     const int BARSPACE=20;
     const int MAXZOOMLEVEL=4;
     const int MINZOOMLEVEL=4;
-    bool clickStage;
+    int clickStage;
     PointF clickC;
     int toolSel;
-    Room r;
+    public Room r;
+    Button lineTool;
+    Button nodeTool;
+    Button nConTool;
+    Button deleTool;
+    Button zoomInBut;
+    Button zoomOutBut;
     //We need to move the room edit buttons to this panel, since this panel
     //should be controlling everything about room editting.
     //Furthermore, floor editting and so on will have different sets of buttons.
@@ -38,7 +44,51 @@ namespace Room_Editor {
       this.MouseMove+=new MouseEventHandler(this.mouseMove);
       this.MouseClick+=new MouseEventHandler(this.mouseClick);
 
-      clickStage=false;
+      #region buttons
+      lineTool=new Button();
+      lineTool.Location=new Point(0,0);
+      lineTool.Size=new Size(32,32);
+      lineTool.Image=Image.FromFile("../../resources/linetool.png");
+      lineTool.Click+=new System.EventHandler(this.lineTool_Click);
+      this.Controls.Add(lineTool);
+
+      nodeTool=new Button();
+      nodeTool.Location=new Point(lineTool.Location.X+32,lineTool.Location.Y);
+      nodeTool.Size=new Size(32,32);
+      nodeTool.Image=Image.FromFile("../../resources/nodetool.png");
+      nodeTool.Click+=new System.EventHandler(this.nodeTool_Click);
+      this.Controls.Add(nodeTool);
+
+      nConTool=new Button();
+      nConTool.Location=new Point(lineTool.Location.X+64,lineTool.Location.Y);
+      nConTool.Size=new Size(32,32);
+      nConTool.Image=Image.FromFile("../../resources/ncontool.png");
+      nConTool.Click+=new System.EventHandler(this.nConTool_Click);
+      this.Controls.Add(nConTool);
+
+      deleTool=new Button();
+      deleTool.Location=new Point(lineTool.Location.X+96,lineTool.Location.Y);
+      deleTool.Size=new Size(32,32);
+      deleTool.Image=Image.FromFile("../../resources/delete.png");
+      deleTool.Click+=new System.EventHandler(this.deleTool_Click);
+      this.Controls.Add(deleTool);
+
+      zoomInBut=new Button();
+      zoomInBut.Location=new Point(this.Width-32,lineTool.Location.Y);
+      zoomInBut.Size=new Size(32,32);
+      zoomInBut.Image=Image.FromFile("../../resources/zoomin.png");
+      zoomInBut.Click+=new System.EventHandler(this.zoomInBut_Click);
+      this.Controls.Add(zoomInBut);
+
+      zoomOutBut=new Button();
+      zoomOutBut.Location=new Point(this.Width-64,lineTool.Location.Y);
+      zoomOutBut.Size=new Size(32,32);
+      zoomOutBut.Image=Image.FromFile("../../resources/zoomout.png");
+      zoomOutBut.Click+=new System.EventHandler(this.zoomOutBut_Click);
+      this.Controls.Add(zoomOutBut);
+      #endregion
+
+      clickStage=0;
       toolSel=1;
       mx=this.Width/2;
       my=this.Height/2;
@@ -61,11 +111,24 @@ namespace Room_Editor {
     }
 
     public void selectTool(int tool) {
-      clickStage=false;
+      if(clickStage!=-1)
+        clickStage=0;
       toolSel=tool;
-    }
-
-    public void keyPress(Object sender,KeyPressEventArgs e) {
+      switch(toolSel) {
+        case 1:
+          lineTool.Select();
+          break;
+        case 2:
+          nodeTool.Select();
+          break;
+        case 3:
+          nConTool.Select();
+          break;
+        default:
+          break;
+      }
+      //if(clickStage==-1)
+        //deleTool.
     }
 
     private void snapTo() {
@@ -129,14 +192,14 @@ namespace Room_Editor {
 
     public void mouseClick(Object sender,MouseEventArgs e) {
       if(toolSel==1) {
-        if(!clickStage) {
-          clickStage=true;
+        if(clickStage==0) {
+          clickStage=1;
           clickC=new PointF(mx,my);
         }
-        else {
+        else if(clickStage==1){
           r.addLine(clickC.X,clickC.Y,mx,my);
           r.saveFile();
-          clickStage=false;
+          clickStage=0;
         }
       }
     }
@@ -209,7 +272,7 @@ namespace Room_Editor {
 
       //Extra Renderings
 
-      if(toolSel==1&&clickStage) {
+      if(toolSel==1&&clickStage==1) {
         b.Color=Color.FromArgb(255,255,255);
         g.DrawLine(new Pen(b.Color),toScreenW(clickC.X),toScreenH(clickC.Y),toScreenW(mx),toScreenH(my));
       }
@@ -230,6 +293,8 @@ namespace Room_Editor {
 
       foreach(var x in this.Controls.OfType<Button>()) {
         x.Invalidate();
+        x.Update();
+        x.Refresh();
       }
       Invalidate();
     }
@@ -238,6 +303,38 @@ namespace Room_Editor {
       this.SuspendLayout();
       this.ResumeLayout(false);
 
+    }
+
+    public void keyPress(Object sender,KeyPressEventArgs e) {
+    }
+
+    private void lineTool_Click(object sender,EventArgs e) {
+      selectTool(1);
+    }
+
+    private void nodeTool_Click(object sender,EventArgs e) {
+      selectTool(2);
+    }
+
+    private void nConTool_Click(object sender,EventArgs e) {
+      selectTool(3);
+    }
+
+    private void deleTool_Click(object sender,EventArgs e) {
+      if(clickStage!=-1)
+        clickStage=-1;
+      else
+        clickStage=0;
+    }
+
+    private void zoomInBut_Click(object sender,EventArgs e) {
+      zoomIn();
+      selectTool(toolSel);
+    }
+
+    private void zoomOutBut_Click(object sender,EventArgs e) {
+      zoomOut();
+      selectTool(toolSel);
     }
   }
 }
