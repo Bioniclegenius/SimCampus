@@ -34,5 +34,13 @@ namespace Room_Editor {
     private void roomToolStripMenuItem_Click(object sender,EventArgs e) {
       p.r.loadFile();
     }
+
+    private void Form1_KeyPress(object sender,KeyPressEventArgs e) {
+      p.keyPress(sender,e);
+    }
+
+    private void saveToolStripMenuItem_Click(object sender,EventArgs e) {
+      p.r.saveFile();
+    }
   }
 }

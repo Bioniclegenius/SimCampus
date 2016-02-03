@@ -116,13 +116,13 @@
             this.buildingToolStripMenuItem,
             this.campusToolStripMenuItem});
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.openToolStripMenuItem.Text = "Open";
       // 
       // roomToolStripMenuItem
       // 
       this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-      this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.roomToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
       this.roomToolStripMenuItem.Text = "Room";
       this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
       // 
@@ -152,8 +152,9 @@
       // saveToolStripMenuItem
       // 
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
       this.saveToolStripMenuItem.Text = "Save";
+      this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
       // 
       // saveAsToolStripMenuItem
       // 
@@ -200,11 +201,13 @@
       this.ClientSize = new System.Drawing.Size(784, 561);
       this.Controls.Add(this.menuStrip1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+      this.KeyPreview = true;
       this.MaximizeBox = false;
       this.Name = "Form1";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
+      this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
       this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();

@@ -24,17 +24,6 @@ namespace Room_Editor {
     Button deleTool;
     Button zoomInBut;
     Button zoomOutBut;
-    //We need to move the room edit buttons to this panel, since this panel
-    //should be controlling everything about room editting.
-    //Furthermore, floor editting and so on will have different sets of buttons.
-    //Things need to be localized.
-    //As further reason, this class needs to be able to read what button is
-    //selected, and adjust as necessary. Therefore...
-    //
-    //This also allows us to put a keyboard listener in here, as opposed to on
-    //the form itself. I'm all for making things less global. Means less work on
-    //the form and easier switching between different editors, since they handle
-    //everything necessary for themselves on their own.
     public RoomEditor(int x,int y,int w,int h) {
       this.Location=new Point(x,y);
       this.Width=w;
@@ -43,6 +32,7 @@ namespace Room_Editor {
       this.Paint+=new PaintEventHandler(this.paintEvent);
       this.MouseMove+=new MouseEventHandler(this.mouseMove);
       this.MouseClick+=new MouseEventHandler(this.mouseClick);
+      this.KeyPress+=new KeyPressEventHandler(this.keyPress);
 
       #region buttons
       lineTool=new Button();
@@ -127,8 +117,10 @@ namespace Room_Editor {
         default:
           break;
       }
-      //if(clickStage==-1)
-        //deleTool.
+      if(clickStage==-1)
+        deleTool.BackColor=Color.FromArgb(255,128,128);
+      else
+        deleTool.BackColor=default(Color);
     }
 
     private void snapTo() {
@@ -174,7 +166,7 @@ namespace Room_Editor {
         zoom/=2;
     }
 
-    public void moveRight(){
+    public void moveRight() {
       cx+=1/zoom;
     }
 
@@ -196,9 +188,8 @@ namespace Room_Editor {
           clickStage=1;
           clickC=new PointF(mx,my);
         }
-        else if(clickStage==1){
+        else if(clickStage==1) {
           r.addLine(clickC.X,clickC.Y,mx,my);
-          r.saveFile();
           clickStage=0;
         }
       }
@@ -302,10 +293,6 @@ namespace Room_Editor {
     private void InitializeComponent() {
       this.SuspendLayout();
       this.ResumeLayout(false);
-
-    }
-
-    public void keyPress(Object sender,KeyPressEventArgs e) {
     }
 
     private void lineTool_Click(object sender,EventArgs e) {
@@ -325,6 +312,7 @@ namespace Room_Editor {
         clickStage=-1;
       else
         clickStage=0;
+      selectTool(toolSel);
     }
 
     private void zoomInBut_Click(object sender,EventArgs e) {
@@ -335,6 +323,31 @@ namespace Room_Editor {
     private void zoomOutBut_Click(object sender,EventArgs e) {
       zoomOut();
       selectTool(toolSel);
+    }
+
+    public void keyPress(object Sender,KeyPressEventArgs e) {
+      if(e.KeyChar=='1') {
+        lineTool.PerformClick();
+      }
+      if(e.KeyChar=='2') {
+        nodeTool.PerformClick();
+      }
+      if(e.KeyChar=='3') {
+        nConTool.PerformClick();
+      }
+      if(e.KeyChar=='4') {
+        deleTool.PerformClick();
+      }
+      if(e.KeyChar=='-') {
+        zoomOutBut.PerformClick();
+      }
+      if(e.KeyChar=='=') {
+        zoomInBut.PerformClick();
+      }
+      if(e.KeyChar==(char)(27)) {
+        clickStage=0;
+        selectTool(toolSel);
+      }
     }
   }
 }
