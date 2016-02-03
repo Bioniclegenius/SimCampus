@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.suo
+Room Editor/Room Editor/bin/Debug/Room Editor.exe
+*.pdb
+Room Editor/Room Editor/bin/Debug/Room Editor.vshost.exe
+*.exe
