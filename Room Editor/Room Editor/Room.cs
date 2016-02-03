@@ -47,7 +47,7 @@ namespace Room_Editor {
                 if(d.ShowDialog() == DialogResult.OK)
                     file = (System.IO.FileStream)d.OpenFile();
                 else
-                    file = new System.IO.FileStream("", System.IO.FileMode.Create);//This will never be reached
+                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
                 location = d.FileName;
             } else {
                 file = new System.IO.FileStream(location, System.IO.FileMode.Create);
