@@ -50,7 +50,11 @@ namespace Room_Editor {
                     file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
                 location = d.FileName;
             } else {
-                file = new System.IO.FileStream(location, System.IO.FileMode.Create);
+                try {
+                    file = new System.IO.FileStream(location, System.IO.FileMode.Create);
+                } catch(Exception e) {
+                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
+                }
             }
             if(location == null || location.Equals("")) {
                 foreach(Node n in nodes) {
@@ -71,16 +75,22 @@ namespace Room_Editor {
             ofd.FilterIndex = 1;
             ofd.Title = "Open Room";
             if(ofd.ShowDialog() == DialogResult.OK) {
-                System.IO.StreamReader readIn = new System.IO.StreamReader(ofd.OpenFile());
+                System.IO.StreamReader save = new System.IO.StreamReader(ofd.OpenFile());
                 location = ofd.FileName;
-                while(readIn.Peek() >= 0) {
-                    String line = readIn.ReadLine();
-                    if(line.Contains("l")) {
-
-                    } else if(line.Contains("n")) {
+                while(save.Peek() >= 0) {
+                    String line = save.ReadLine();
+                    String[] items = line.Split(' ');
+                    if(line.Contains("L")) {
+                        PointF pt1 = new PointF(Convert.ToInt32(items[1]), Convert.ToInt32(items[2]));
+                        PointF pt2 = new PointF(Convert.ToInt32(items[3]), Convert.ToInt32(items[4]));
+                        PointF[] a = {pt1, pt2};
+                        lines.Add(a);
+                    } else if(line.Contains("N")) {
 
                     }
                 }
+                //MessageBox.Show("DONE");
+                save.Close();
             } 
         }
     }
