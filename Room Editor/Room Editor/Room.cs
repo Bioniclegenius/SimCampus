@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Room_Editor {
-    class Room {
+    public class Room {
         private string name;
         private string location;
         public List<PointF[]> lines = new List<PointF[]>();
@@ -71,7 +69,13 @@ namespace Room_Editor {
             file.Close();
         }
 
-        public void loadFile(string fileName) {
+        public void loadFile() {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Room| *.rm";
+            ofd.FilterIndex = 1;
+            ofd.Title = "Open Room";
+            ofd.ShowDialog();
+            /*
             string[] fileLines = System.IO.File.ReadAllLines(fileName);
 
             for(int x = 1;x < fileLines.Length;x++) {

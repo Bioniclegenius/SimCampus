@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Room_Editor
 {
-    class Node
+    public class Node
     {
         private float x, y, z;
         private int number;
