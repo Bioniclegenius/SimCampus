@@ -9,7 +9,7 @@ namespace Room_Editor {
         private string name;
         private string location;
         public List<PointF[]> lines = new List<PointF[]>();
-        private List<Node> nodes = new List<Node>();
+        public List<Node> nodes = new List<Node>();
 
 
         public Room(string name = "") {
