@@ -24,7 +24,7 @@ namespace Room_Editor {
         public void addNode(float x, float y, float z) {
             Node n = getNodeReference(x, y, z);
             if(n == null) {
-                Node node = new Node(name, x, y, z, nodes[nodes.Count].Number + 1);//Assumes nodes are in numerical order
+                Node node = new Node(name, x, y, z, nodes[nodes.Count - 1].Number + 1);//Assumes nodes are in numerical order
                 nodes.Add(node);
             }
         }
@@ -111,7 +111,7 @@ namespace Room_Editor {
                     file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
                 }
             }
-            if(location == null || location.Equals("")) {
+            if(location != null || !location.Equals("")) {
                 foreach(Node n in nodes) {
                     byte[] line = new UTF8Encoding(true).GetBytes(n.toString());
                     file.Write(line, 0, line.Length);
