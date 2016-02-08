@@ -21,8 +21,40 @@ namespace Room_Editor {
             lines.Add(a);
         }
 
-        public void addNode(Node n) {
-            nodes.Add(n);
+        public void addNode(float x, float y, float z) {
+            bool exists = false;
+            foreach(Node node in nodes) {
+                if(node.X == x && node.Y == y && node.Z == z) {
+                    exists = true;
+                    break;
+                }
+            }
+            if(exists == true) {
+                Node n = new Node(name, x, y, z, nodes[nodes.Count].Number + 1);//Assumes nodes are in numerical order
+                nodes.Add(n);
+            }
+        }
+
+        public void removeNode(float x, float y, float z) {
+            bool exists = false;
+            int nodeNum = -1;
+            for(int k = 0;k < nodes.Count;k++) {
+                if(nodes[k].X == x && nodes[k].Y == y && nodes[k].Z == z) {
+                    exists = true;
+                    nodeNum = k;
+                    break;
+                }
+            }
+            if(exists == true) {
+                foreach(Node n in nodes) {
+                    n.removeConnection(nodes[nodeNum]);
+                }
+                nodes.Remove(nodes[nodeNum]);
+                for(int k = nodeNum; k < nodes.Count;k++) {
+                    nodes[k].Name = name + "N" + k;
+                    nodes[k].Number = k;
+                }
+            }
         }
 
         public bool addConnection(Node n1, Node n2) {
