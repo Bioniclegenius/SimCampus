@@ -79,11 +79,19 @@ namespace Room_Editor {
 
             return success;
         }
+
         private Node getNodeReference(double x, double y, double z) {
           for(int t=0;t<nodes.Count;t++)
             if(nodes[t].x==x&&nodes[t].y==y&&nodes[t].z==z)
               return nodes[t];
           return null;
+        }
+
+        private void clearRoom() {
+            lines.Clear();
+            nodes.Clear();
+            location = "";
+            name = "";
         }
 
         public void saveFile() {
@@ -107,6 +115,7 @@ namespace Room_Editor {
                 }
             }
             if(location != null || !location.Equals("")) {
+                clearRoom();
                 foreach(Node n in nodes) {
                     byte[] line = new UTF8Encoding(true).GetBytes(n.toString());
                     file.Write(line, 0, line.Length);
@@ -125,6 +134,7 @@ namespace Room_Editor {
             ofd.FilterIndex = 1;
             ofd.Title = "Open Room";
             if(ofd.ShowDialog() == DialogResult.OK) {
+                clearRoom();
                 System.IO.StreamReader save = new System.IO.StreamReader(ofd.OpenFile());
                 location = ofd.FileName;
                 while(save.Peek() >= 0) {
@@ -136,10 +146,10 @@ namespace Room_Editor {
                         PointF[] a = {pt1, pt2};
                         lines.Add(a);
                     } else if(line.Contains("N")) {
-
+                        Node n = new Node(name, Convert.ToDouble(items[2]), Convert.ToDouble(items[3]), Convert.ToDouble(items[4]), Convert.ToInt32(items[1]));
+                        nodes.Add(n);
                     }
                 }
-                //MessageBox.Show("DONE");
                 save.Close();
             } 
         }

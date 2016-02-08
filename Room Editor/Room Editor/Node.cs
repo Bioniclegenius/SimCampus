@@ -9,7 +9,6 @@ namespace Room_Editor
     public class Node
     {
         public double x, y, z;
-        private int number;
         private string name;
         public List<Node> connections = new List<Node>();
         public List<double> weights = new List<double>();
@@ -41,7 +40,7 @@ namespace Room_Editor
 
         public string toString()
         {
-            string theString = "N " + number + " ";//The node number
+            string theString = "N " + Number + " ";//The node number
             theString += x + " " + y + " " + z + " ";//Location
 
             foreach (Node n in connections)
