@@ -21,7 +21,7 @@ namespace Room_Editor {
             lines.Add(a);
         }
 
-        public void addNode(float x, float y, float z) {
+        public void addNode(double x, double y, double z) {
             Node n = getNodeReference(x, y, z);
             if(n == null) {
                 int num = 0;
@@ -36,7 +36,7 @@ namespace Room_Editor {
             bool exists = false;
             int nodeNum = -1;
             for(int k = 0;k < nodes.Count;k++) {
-                if(nodes[k].X == x && nodes[k].Y == y && nodes[k].Z == z) {
+                if(nodes[k].x == x && nodes[k].y == y && nodes[k].z == z) {
                     exists = true;
                     nodeNum = k;
                     break;
@@ -79,19 +79,11 @@ namespace Room_Editor {
 
             return success;
         }
-        private Node getNodeReference(float x, float y, float z) {
-            bool exists = false;
-            int k;
-            for(k = 0;k < nodes.Count;k++) {
-                if(nodes[k].X == x && nodes[k].Y == y && nodes[k].Z == z) {
-                    exists = true;
-                    break;
-                }
-            }
-            if(exists == true)
-                return nodes[k];
-            else
-                return null;
+        private Node getNodeReference(double x, double y, double z) {
+          for(int t=0;t<nodes.Count;t++)
+            if(nodes[t].x==x&&nodes[t].y==y&&nodes[t].z==z)
+              return nodes[t];
+          return null;
         }
 
         public void saveFile() {

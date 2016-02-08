@@ -8,7 +8,7 @@ namespace Room_Editor
 {
     public class Node
     {
-        private float x, y, z;
+        public double x, y, z;
         private int number;
         private string name;
         public List<Node> connections = new List<Node>();
@@ -16,11 +16,8 @@ namespace Room_Editor
 
         public string Name { get; set; }
         public int Number { get; set; }
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
 
-        public Node(string name, float inX, float inY, float inZ, int number)
+        public Node(string name, double inX, double inY, double inZ, int number)
         {
             this.name = name + "N" + number;
             x = inX;

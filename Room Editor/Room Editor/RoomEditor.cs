@@ -213,17 +213,38 @@ namespace Room_Editor {
           removeOnLine(1/zoom/20);
         }
       }
+      else if(toolSel==2) {
+        r.addNode(mx,my,0);
+      }
     }
 
+    #region Screen Coordinate Conversions
     public int toScreenW(float num) {
       int goal=(int)(this.Width/2+num*zoom*BARSPACE+.5);
       return goal;
+    }
+
+    public int toScreenW(double num) {
+      return toScreenW((float)(num));
+    }
+
+    public int toScreenW(int num) {
+      return toScreenW((float)(num));
     }
 
     public int toScreenH(float num) {
       int goal=(int)(this.Height/2-num*zoom*BARSPACE+.5);
       return goal;
     }
+
+    public int toScreenH(double num) {
+      return toScreenH((float)(num));
+    }
+
+    public int toScreenH(int num) {
+      return toScreenH((float)(num));
+    }
+    #endregion
 
     public void paintEvent(Object sender,PaintEventArgs e) {
       Graphics g=e.Graphics;
@@ -280,6 +301,11 @@ namespace Room_Editor {
         g.DrawLine(p,toScreenW(r.lines[x][0].X),toScreenH(r.lines[x][0].Y),
                                     toScreenW(r.lines[x][1].X),toScreenH(r.lines[x][1].Y));
       }
+      p.Color=Color.FromArgb(255,255,0);
+      p.Width=1;
+      for(int x=0;x<r.nodes.Count;x++) {
+        g.DrawEllipse(p,toScreenW(r.nodes[x].x)-BARSPACE*zoom,toScreenH(r.nodes[x].y)-BARSPACE*zoom,BARSPACE*2*zoom,BARSPACE*2*zoom);
+      }
 
       //Extra Renderings
 
@@ -301,6 +327,10 @@ namespace Room_Editor {
       g.FillRectangle(b,0,this.Height-coordSize.Height-1,coordSize.Width+1,coordSize.Height+1);//Internal Box
       b.Color=Color.FromArgb(160,160,160);
       g.DrawString(coordinateOutput,f,b,new PointF(2,this.Height-coordSize.Height));//text
+
+      g.DrawString(Convert.ToString(r.nodes.Count),f,b,new PointF(5,37));
+      if(r.nodes.Count>0)
+        g.DrawString(r.nodes[0].toString(),f,b,new PointF(5,70));
 
       foreach(var x in this.Controls.OfType<Button>()) {
         x.Invalidate();
