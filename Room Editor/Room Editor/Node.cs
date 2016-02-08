@@ -20,12 +20,13 @@ namespace Room_Editor
         public float Y { get; set; }
         public float Z { get; set; }
 
-        public Node(string name, float inX, float inY, int inZ, int number)
+        public Node(string name, float inX, float inY, float inZ, int number)
         {
             this.name = name + "N" + number;
             x = inX;
             y = inY;
             z = inZ;
+            Number = number;
         }
 
         public void addConnection(Node a){
@@ -48,7 +49,7 @@ namespace Room_Editor
 
             foreach (Node n in connections)
             {
-                theString += n.getNumber() + " ";
+                theString += n.Number + " ";
             }
 
             return theString + "\n";

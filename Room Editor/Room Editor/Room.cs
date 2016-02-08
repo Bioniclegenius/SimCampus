@@ -22,16 +22,10 @@ namespace Room_Editor {
         }
 
         public void addNode(float x, float y, float z) {
-            bool exists = false;
-            foreach(Node node in nodes) {
-                if(node.X == x && node.Y == y && node.Z == z) {
-                    exists = true;
-                    break;
-                }
-            }
-            if(exists == true) {
-                Node n = new Node(name, x, y, z, nodes[nodes.Count].Number + 1);//Assumes nodes are in numerical order
-                nodes.Add(n);
+            Node n = getNodeReference(x, y, z);
+            if(n == null) {
+                Node node = new Node(name, x, y, z, nodes[nodes.Count].Number + 1);//Assumes nodes are in numerical order
+                nodes.Add(node);
             }
         }
 
@@ -57,15 +51,44 @@ namespace Room_Editor {
             }
         }
 
-        public bool addConnection(Node n1, Node n2) {
+        public bool addConnection(float x1, float y1, float z1, float x2, float y2, float z2) {
             bool success = false;
-            if(nodes.Contains(n1) == true && nodes.Contains(n2) == true) {
+            Node n1 = getNodeReference(x1, y1, z1);
+            Node n2 = getNodeReference(x2, y2, z2);
+            if(n1 != null && n2 != null) {
                 n1.addConnection(n2);
                 n2.addConnection(n1);
                 success = true;
             }
 
             return success;
+        }
+
+        public bool removeConnection(float x1, float y1, float z1, float x2, float y2, float z2) {
+            bool success = false;
+            Node n1 = getNodeReference(x1, y1, z1);
+            Node n2 = getNodeReference(x2, y2, z2);
+            if(n1 != null && n2 != null) {
+                n1.removeConnection(n2);
+                n2.removeConnection(n1);
+                success = true;
+            }
+
+            return success;
+        }
+        private Node getNodeReference(float x, float y, float z) {
+            bool exists = false;
+            int k;
+            for(k = 0;k < nodes.Count;k++) {
+                if(nodes[k].X == x && nodes[k].Y == y && nodes[k].Z == z) {
+                    exists = true;
+                    break;
+                }
+            }
+            if(exists == true)
+                return nodes[k];
+            else
+                return null;
         }
 
         public void saveFile() {
