@@ -24,7 +24,10 @@ namespace Room_Editor {
         public void addNode(float x, float y, float z) {
             Node n = getNodeReference(x, y, z);
             if(n == null) {
-                Node node = new Node(name, x, y, z, nodes[nodes.Count - 1].Number + 1);//Assumes nodes are in numerical order
+                int num = 0;
+                if(nodes.Count > 0)
+                    num = nodes[nodes.Count - 1].Number + 1;
+                Node node = new Node(name, x, y, z, num);//Assumes nodes are in numerical order
                 nodes.Add(node);
             }
         }
