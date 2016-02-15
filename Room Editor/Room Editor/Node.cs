@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Room_Editor
-{
-    public class Node
-    {
+namespace Room_Editor {
+    public class Node {
         public double x, y, z;
 
         public List<Node> connections = new List<Node>();
@@ -21,10 +19,10 @@ namespace Room_Editor
         public string Name { get; set; }
         public int Number { get; set; }
         public int Type { get; set; }
+        public string Comment { get; set; }
 
 
-        public Node(string name, double inX, double inY, double inZ, int number)
-        {
+        public Node(string name, double inX, double inY, double inZ, int number) {
             Name = name + "N" + number;
             x = inX;
             y = inY;
@@ -33,7 +31,7 @@ namespace Room_Editor
             Type = 0;
         }
 
-        public void addConnection(Node a){
+        public void addConnection(Node a) {
             connections.Add(a);
             weights.Add(Math.Sqrt(Math.Pow(a.x - x, 2) + Math.Pow(a.y - y, 2)));
         }
@@ -46,14 +44,16 @@ namespace Room_Editor
             }
         }
 
-        public string toString()
-        {
+        public string toString() {
             string theString = "N " + Number + " ";//The node number
             theString += x + " " + y + " " + z + " ";//Location
 
-            foreach (Node n in connections)
-            {
+            foreach(Node n in connections) {
                 theString += n.Number + " ";
+            }
+
+            if(Comment.Equals("")) {
+                theString += "C " + Comment;
             }
 
             return theString + "\n";

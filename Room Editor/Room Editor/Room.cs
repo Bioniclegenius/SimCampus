@@ -47,7 +47,7 @@ namespace Room_Editor {
                     n.removeConnection(nodes[nodeNum]);
                 }
                 nodes.Remove(nodes[nodeNum]);
-                for(int k = nodeNum; k < nodes.Count;k++) {
+                for(int k = nodeNum;k < nodes.Count;k++) {
                     nodes[k].Name = name + "N" + k;
                     nodes[k].Number = k;
                 }
@@ -81,10 +81,10 @@ namespace Room_Editor {
         }
 
         private Node getNodeReference(double x, double y, double z) {
-          for(int t=0;t<nodes.Count;t++)
-            if(nodes[t].x==x&&nodes[t].y==y&&nodes[t].z==z)
-              return nodes[t];
-          return null;
+            for(int t = 0;t < nodes.Count;t++)
+                if(nodes[t].x == x && nodes[t].y == y && nodes[t].z == z)
+                    return nodes[t];
+            return null;
         }
 
         private void clearRoom() {
@@ -142,15 +142,18 @@ namespace Room_Editor {
                     if(line.Contains("L")) {
                         PointF pt1 = new PointF(Convert.ToInt32(items[1]), Convert.ToInt32(items[2]));
                         PointF pt2 = new PointF(Convert.ToInt32(items[3]), Convert.ToInt32(items[4]));
-                        PointF[] a = {pt1, pt2};
+                        PointF[] a = { pt1, pt2 };
                         lines.Add(a);
                     } else if(line.Contains("N")) {
                         Node n = new Node(name, Convert.ToDouble(items[2]), Convert.ToDouble(items[3]), Convert.ToDouble(items[4]), Convert.ToInt32(items[1]));
+                        if(items[items.Length - 2].Equals("C")) {
+                            n.Comment = items[items.Length - 1];
+                        }
                         nodes.Add(n);
                     }
                 }
                 save.Close();
-            } 
+            }
         }
     }
 }
