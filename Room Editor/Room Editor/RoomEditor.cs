@@ -199,6 +199,18 @@ namespace Room_Editor {
       }
     }
 
+    public void removeOnNode(float error) {
+      for(int x=r.nodes.Count-1;x>=0;x--) {
+        double x1=r.nodes[x].x;
+        double y1=r.nodes[x].y;
+        double dist=Math.Sqrt(Math.Pow(x1-mx,2)+Math.Pow(y1-my,2));
+        if(dist<=error) {
+          r.removeNode((float)(x1),(float)(y1),0f);
+          break;
+        }
+      }
+    }
+
     public void mouseClick(Object sender,MouseEventArgs e) {
       if(toolSel==1) {
         if(clickStage==0) {
@@ -210,11 +222,14 @@ namespace Room_Editor {
           clickStage=0;
         }
         else {
-          removeOnLine(1/zoom/20);
+          removeOnLine(1/zoom/BARSPACE);
         }
       }
       else if(toolSel==2) {
-        r.addNode(mx,my,0);
+        if(clickStage==0)
+          r.addNode(mx,my,0);
+        else
+          removeOnNode(10/zoom/BARSPACE);
       }
     }
 
@@ -299,12 +314,13 @@ namespace Room_Editor {
       p.Width=2;
       for(int x=0;x<r.lines.Count;x++) {
         g.DrawLine(p,toScreenW(r.lines[x][0].X),toScreenH(r.lines[x][0].Y),
-                                    toScreenW(r.lines[x][1].X),toScreenH(r.lines[x][1].Y));
+                               toScreenW(r.lines[x][1].X),toScreenH(r.lines[x][1].Y));
       }
       p.Color=Color.FromArgb(255,255,0);
       p.Width=1;
       for(int x=0;x<r.nodes.Count;x++) {
-        g.DrawEllipse(p,toScreenW(r.nodes[x].x)-BARSPACE*zoom,toScreenH(r.nodes[x].y)-BARSPACE*zoom,BARSPACE*2*zoom,BARSPACE*2*zoom);
+        g.DrawEllipse(p,toScreenW(r.nodes[x].x)-BARSPACE*zoom,toScreenH(r.nodes[x].y)-BARSPACE*zoom,
+                                  BARSPACE*2*zoom,BARSPACE*2*zoom);
       }
 
       //Extra Renderings
@@ -327,10 +343,6 @@ namespace Room_Editor {
       g.FillRectangle(b,0,this.Height-coordSize.Height-1,coordSize.Width+1,coordSize.Height+1);//Internal Box
       b.Color=Color.FromArgb(160,160,160);
       g.DrawString(coordinateOutput,f,b,new PointF(2,this.Height-coordSize.Height));//text
-
-      g.DrawString(Convert.ToString(r.nodes.Count),f,b,new PointF(5,37));
-      if(r.nodes.Count>0)
-        g.DrawString(r.nodes[0].toString(),f,b,new PointF(5,70));
 
       foreach(var x in this.Controls.OfType<Button>()) {
         x.Invalidate();
