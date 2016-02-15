@@ -199,16 +199,25 @@ namespace Room_Editor {
       }
     }
 
-    public void removeOnNode(float error) {
+    public int checkOnNode(float error) {
+      double mindist=error;
+      int nodeSel=-1;
       for(int x=r.nodes.Count-1;x>=0;x--) {
         double x1=r.nodes[x].x;
         double y1=r.nodes[x].y;
         double dist=Math.Sqrt(Math.Pow(x1-mx,2)+Math.Pow(y1-my,2));
-        if(dist<=error) {
-          r.removeNode((float)(x1),(float)(y1),0f);
-          break;
+        if(dist<=error&&dist<=mindist) {
+          mindist=dist;
+          nodeSel=x;
         }
       }
+      return nodeSel;
+    }
+
+    public void removeOnNode(float error) {
+      int nodeSel=checkOnNode(error);
+      if(nodeSel>=0)
+        r.removeNode(r.nodes[nodeSel].x,r.nodes[nodeSel].y,r.nodes[nodeSel].z);
     }
 
     public void mouseClick(Object sender,MouseEventArgs e) {
@@ -229,7 +238,7 @@ namespace Room_Editor {
         if(clickStage==0)
           r.addNode(mx,my,0);
         else
-          removeOnNode(10/zoom/BARSPACE);
+          removeOnNode(1/zoom);
       }
     }
 
@@ -319,6 +328,12 @@ namespace Room_Editor {
       p.Color=Color.FromArgb(255,255,0);
       p.Width=1;
       for(int x=0;x<r.nodes.Count;x++) {
+        if(toolSel==2&&clickStage==-1) {
+          if(checkOnNode(1/zoom)==x)
+            p.Color=Color.FromArgb(255,0,0);
+          else
+            p.Color=Color.FromArgb(255,255,0);
+        }
         g.DrawEllipse(p,toScreenW(r.nodes[x].x)-BARSPACE*zoom,toScreenH(r.nodes[x].y)-BARSPACE*zoom,
                                   BARSPACE*2*zoom,BARSPACE*2*zoom);
       }

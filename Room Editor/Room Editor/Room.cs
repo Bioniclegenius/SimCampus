@@ -32,7 +32,7 @@ namespace Room_Editor {
             }
         }
 
-        public void removeNode(float x, float y, float z) {
+        public void removeNode(double x, double y, double z) {
             bool exists = false;
             int nodeNum = -1;
             for(int k = 0;k < nodes.Count;k++) {
