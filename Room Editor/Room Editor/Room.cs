@@ -27,7 +27,7 @@ namespace Room_Editor {
                 int num = 0;
                 if(nodes.Count > 0)
                     num = nodes[nodes.Count - 1].Number + 1;
-                Node node = new Node(name, x, y, z, num);//Assumes nodes are in numerical order
+                Node node = new Node(name, x, y, z, num); //Assumes nodes are in numerical order
                 nodes.Add(node);
             }
         }
@@ -105,17 +105,16 @@ namespace Room_Editor {
                 if(d.ShowDialog() == DialogResult.OK)
                     file = (System.IO.FileStream)d.OpenFile();
                 else
-                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
+                    return;
                 location = d.FileName;
             } else {
                 try {
                     file = new System.IO.FileStream(location, System.IO.FileMode.Create);
                 } catch(Exception e) {
-                    file = new System.IO.FileStream("test.rm", System.IO.FileMode.Create);//This will never be reached
+                    return;
                 }
             }
             if(location != null || !location.Equals("")) {
-                clearRoom();
                 foreach(Node n in nodes) {
                     byte[] line = new UTF8Encoding(true).GetBytes(n.toString());
                     file.Write(line, 0, line.Length);

@@ -9,20 +9,28 @@ namespace Room_Editor
     public class Node
     {
         public double x, y, z;
-        private string name;
+
         public List<Node> connections = new List<Node>();
         public List<double> weights = new List<double>();
 
+        /** Number type 
+        * 0 - Normal Path
+        * 1 - 
+        */
+
         public string Name { get; set; }
         public int Number { get; set; }
+        public int Type { get; set; }
+
 
         public Node(string name, double inX, double inY, double inZ, int number)
         {
-            this.name = name + "N" + number;
+            Name = name + "N" + number;
             x = inX;
             y = inY;
             z = inZ;
             Number = number;
+            Type = 0;
         }
 
         public void addConnection(Node a){
