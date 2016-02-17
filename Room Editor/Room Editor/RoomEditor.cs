@@ -16,6 +16,7 @@ namespace Room_Editor {
     const int MINZOOMLEVEL=4;
     int clickStage;
     PointF clickC;
+    int nodeSel;
     int toolSel;
     public Room r;
     Button lineTool;
@@ -79,6 +80,7 @@ namespace Room_Editor {
       #endregion
 
       clickStage=0;
+      nodeSel=-1;
       toolSel=1;
       mx=this.Width/2;
       my=this.Height/2;
@@ -221,6 +223,7 @@ namespace Room_Editor {
     }
 
     public void mouseClick(Object sender,MouseEventArgs e) {
+      #region linetool
       if(toolSel==1) {
         if(clickStage==0) {
           clickStage=1;
@@ -234,12 +237,34 @@ namespace Room_Editor {
           removeOnLine(1/zoom/BARSPACE);
         }
       }
+      #endregion
+      #region nodetool
       else if(toolSel==2) {
         if(clickStage==0)
           r.addNode(mx,my,0);
         else
           removeOnNode(1/zoom);
       }
+      #endregion
+      #region nodeconnectiontool
+      else if(toolSel==3) {
+        if(clickStage==0) {
+          nodeSel=checkOnNode(1/zoom);
+          if(nodeSel!=-1)
+            clickStage=1;
+        }
+        else if(clickStage==1) {
+          int nodeTo=checkOnNode(1/zoom);
+          if(nodeTo!=-1&&nodeTo!=nodeSel) {
+            clickStage=0;
+            r.addConnection(nodeSel,nodeTo);
+            nodeSel=-1;
+          }
+        }
+        else {
+        }
+      }
+      #endregion
     }
 
     #region Screen Coordinate Conversions
@@ -328,14 +353,18 @@ namespace Room_Editor {
       p.Color=Color.FromArgb(255,255,0);
       p.Width=1;
       for(int x=0;x<r.nodes.Count;x++) {
-        if(toolSel==2&&clickStage==-1) {
-          if(checkOnNode(1/zoom)==x)
+        if(toolSel==2||toolSel==3) {
+          if(checkOnNode(1/zoom)==x||nodeSel==x)
             p.Color=Color.FromArgb(255,0,0);
           else
             p.Color=Color.FromArgb(255,255,0);
         }
         g.DrawEllipse(p,toScreenW(r.nodes[x].x)-BARSPACE*zoom,toScreenH(r.nodes[x].y)-BARSPACE*zoom,
                                   BARSPACE*2*zoom,BARSPACE*2*zoom);
+        p.Color=Color.FromArgb(255,255,0);
+        for(int y=0;y<r.nodes[x].connections.Count;y++)
+          g.DrawLine(p,toScreenW(r.nodes[x].x),toScreenH(r.nodes[x].y),
+                       toScreenW(r.nodes[x].connections[y].x),toScreenH(r.nodes[x].connections[y].y));
       }
 
       //Extra Renderings
@@ -358,6 +387,7 @@ namespace Room_Editor {
       g.FillRectangle(b,0,this.Height-coordSize.Height-1,coordSize.Width+1,coordSize.Height+1);//Internal Box
       b.Color=Color.FromArgb(160,160,160);
       g.DrawString(coordinateOutput,f,b,new PointF(2,this.Height-coordSize.Height));//text
+      //g.DrawString(Convert.ToString(clickStage),f,b,new PointF(5,35));//Debug text output
 
       foreach(var x in this.Controls.OfType<Button>()) {
         x.Invalidate();
