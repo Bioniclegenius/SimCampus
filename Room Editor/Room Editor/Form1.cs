@@ -42,5 +42,10 @@ namespace Room_Editor {
     private void saveToolStripMenuItem_Click(object sender,EventArgs e) {
       p.r.saveFile();
     }
+
+    private void saveAsToolStripMenuItem_Click(object sender,EventArgs e) {
+      p.r.location="";
+      p.r.saveFile();
+    }
   }
 }
