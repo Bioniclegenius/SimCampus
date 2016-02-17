@@ -29,6 +29,7 @@ namespace Room_Editor {
             z = inZ;
             Number = number;
             Type = 0;
+            Comment = "";
         }
 
         public void addConnection(Node a) {
@@ -52,7 +53,7 @@ namespace Room_Editor {
                 theString += n.Number + " ";
             }
 
-            if(Comment.Equals("")) {
+            if(!Comment.Equals("")) {
                 theString += "C " + Comment;
             }
 
