@@ -1,2 +1,10 @@
 c:\users\jssmi_000\documents\visual studio 2015\Projects\Testing_Ground_Area_51\Testing_Ground_Area_51\bin\Debug\Testing_Ground_Area_51.exe.config
 C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\bin\Debug\Testing_Ground_Area_51.exe.config
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\bin\Debug\Testing_Ground_Area_51.exe
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\bin\Debug\Testing_Ground_Area_51.pdb
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.csprojResolveAssemblyReference.cache
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.Form1.resources
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.Properties.Resources.resources
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.csproj.GenerateResource.Cache
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.exe
+C:\Users\jssmi_000\Documents\GitHub\SimCampus\Testing_Ground_Area_51\Testing_Ground_Area_51\obj\Debug\Testing_Ground_Area_51.pdb
