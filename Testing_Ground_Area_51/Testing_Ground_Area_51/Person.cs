@@ -23,20 +23,22 @@ namespace Testing_Ground_Area_51 {
       Node a = currentNode;
 
       a.totalDistance = 0;
-      int count = 0;
       path.Add(currentNode);
 
+      List<Node> t = new List<Node>();
+      t.Add(a);
+
       while(true) {
-        Node u = a.getSmallestDistance();
-        count++;
-        foreach(Node v in u.connections) {
-          double alt = u.totalDistance + u.distanceTo(v);
-          if(alt < v.totalDistance) {
+        Node n = getSmallestDistance(t);
+        foreach(Node v in n.connections) {
+          double alt = n.totalDistance + n.distanceTo(v);
+          if(alt < v.totalDistance || v.totalDistance == -1) {
             v.totalDistance = alt;
-            v.parent = u;
+            v.parent = n;
+            t.Add(v);
           }
         }
-        if(count == 50) break;
+        if(n == dest) break;
       }
 
       //Gets path backwards
@@ -45,6 +47,7 @@ namespace Testing_Ground_Area_51 {
       Node current = dest;
       temp.Add(current);
       while(keepGoing) {
+        Console.WriteLine(current);
         temp.Add(current = current.parent);
         if(current.parent == null)
           keepGoing = false;
@@ -53,6 +56,16 @@ namespace Testing_Ground_Area_51 {
       //Stores path forwards
       for(int k = temp.Count - 1;k >= 0;k--)
         path.Add(temp[k]);
+    }
+
+    public Node getSmallestDistance(List<Node> nodes) {
+      int x = 0;
+      for(int k = 0; k < nodes.Count;k++) {
+        if(nodes[k].totalDistance < nodes[x].totalDistance) {
+          x = k;
+        }
+      }
+      return nodes[x];
     }
   }
 }
