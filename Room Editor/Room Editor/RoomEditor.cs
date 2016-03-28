@@ -340,7 +340,7 @@ namespace Room_Editor {
         g.FillRectangle(b,0,this.Height/2+BARSPACE*y,this.Width,1);
       }
       b.Color=Color.FromArgb(255,255,255);
-      g.FillEllipse(b,toScreenW(mx)-3,toScreenH(my)-3,6,6);//mouse locator
+      g.FillRectangle(b,toScreenW(mx)-2,toScreenH(my)-2,5,5);//mouse locator
 
       //Draw Room
       b.Color=Color.FromArgb(255,64,64);
