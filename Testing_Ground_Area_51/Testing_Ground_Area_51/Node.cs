@@ -10,8 +10,6 @@ namespace Testing_Ground_Area_51 {
 
     public List<Node> connections = new List<Node>();
     public List<double> weights = new List<double>();
-    public Node parent = null;
-    public double totalDistance = -1;
 
     /** Number type 
     * 0 - Normal Path
@@ -60,14 +58,6 @@ namespace Testing_Ground_Area_51 {
       }
 
       return theString + "\n";
-    }
-
-    public void resetPathfinding() {
-      parent = null;
-      totalDistance = -1;
-      foreach(Node n in connections)
-        if(n.parent != null)
-          n.resetPathfinding();
     }
 
     public Node getSmallestDistance() {

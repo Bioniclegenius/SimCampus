@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,31 +14,34 @@ namespace Testing_Ground_Area_51 {
     public Form1() {
       InitializeComponent();
 
-      Random rand = new Random();
-      Node[] nodes = new Node[30];
-      for(int k = 0; k < 30;k++) {
-        nodes[k] = new Node("A", rand.Next(100), rand.Next(100), 0, (k + 1));
-      }
-
-      for(int s = 0; s < 30; s++) {
-        int skip = rand.Next(30);
-        for(int k = 0; k < 30;k++) {
-          if(k != s && k != skip) 
-            nodes[s].addConnection(nodes[k]);
-        }
-      }
-
-      /*label1.Text = "All NODES\n";
-      for(int k = 0;k < 30;k++)
-        label1.Text += nodes[k].toString();
-      */
+      List<Node> nodes = new List<Node>();
+      Room r = new Room();
+      r.loadFile();
+      nodes = r.nodes;
       Person jackson = new Person(0, 0);
       jackson.currentNode = nodes[0];
-      jackson.calculatePath(nodes[20]);
+
+      DateTime start;
+      TimeSpan time;
+
+      start = DateTime.Now;
+      jackson.calculatePath(nodes[5]);
+      time = DateTime.Now - start;
       label1.Text = "Nodes in the Path";
       foreach(Node n in jackson.path) {
         label1.Text += "\n" + n.toString();
       }
+      label1.Text += "\n" + String.Format("{0}.{1}", time.Seconds, time.Milliseconds.ToString().PadLeft(3, '0')); ;
+
+      start = DateTime.Now;
+      jackson.calculatePath(nodes[4]);
+      time = DateTime.Now - start;
+      label1.Text += "\nNodes in the Path 2";
+      foreach(Node n in jackson.path) {
+        label1.Text += "\n" + n.toString();
+      }
+      label1.Text += "\n" + String.Format("{0}.{1}", time.Seconds, time.Milliseconds.ToString().PadLeft(3, '0')); ;
+
       //label1.Text = "n1.Equals(30) " + nodes[0].Equals(nodes[20]); 
     }
   }

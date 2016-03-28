@@ -19,22 +19,32 @@ namespace Testing_Ground_Area_51 {
     }
 
     public void calculatePath(Node dest) {
-      currentNode.resetPathfinding();
+      //currentNode.resetPathfinding();
+      Dictionary<Node, double> distances = new Dictionary<Node, double>();
+      Dictionary<Node, Node> parents = new Dictionary<Node, Node>();
+      path = new List<Node>();
+
       Node a = currentNode;
 
-      a.totalDistance = 0;
+      distances[a] = 0;
 
       List<Node> t = new List<Node>();
       t.Add(a);
 
       while(true) {
-        Node n = getSmallestDistance(t);
+        Node n = getSmallestDistance(t, distances);
         t.Remove(n);
         foreach(Node v in n.connections) {
-          double alt = n.totalDistance + n.distanceTo(v);
-          if(alt < v.totalDistance || v.totalDistance == -1) {
-            v.totalDistance = alt;
-            v.parent = n;
+          double alt = distances[n] + n.distanceTo(v);
+          try {
+            if(alt < distances[v]) {
+              distances[v] = alt;
+              parents[v] = n;
+              t.Add(v);
+            }
+          } catch(Exception e) {
+            distances[v] = alt;
+            parents[v] = n;
             t.Add(v);
           }
         }
@@ -47,10 +57,13 @@ namespace Testing_Ground_Area_51 {
       Node current = dest;
       temp.Add(current);
       while(keepGoing) {
-        Console.WriteLine(current);
-        temp.Add(current = current.parent);
-        if(current.parent == null)
+        temp.Add(current = parents[current]);
+        try {
+          if(parents[current] != null)
+            keepGoing = true;
+        } catch (Exception e) {
           keepGoing = false;
+        }
       }
 
       //Stores path forwards
@@ -58,10 +71,10 @@ namespace Testing_Ground_Area_51 {
         path.Add(temp[k]);
     }
 
-    public Node getSmallestDistance(List<Node> nodes) {
+    public Node getSmallestDistance(List<Node> nodes, Dictionary<Node, double> distances) {
       int x = 0;
       for(int k = 0; k < nodes.Count;k++) {
-        if(nodes[k].totalDistance < nodes[x].totalDistance) {
+        if(distances[nodes[k]] < distances[nodes[x]]) {
           x = k;
         }
       }
