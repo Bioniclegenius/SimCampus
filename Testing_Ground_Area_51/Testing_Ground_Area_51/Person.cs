@@ -23,13 +23,13 @@ namespace Testing_Ground_Area_51 {
       Node a = currentNode;
 
       a.totalDistance = 0;
-      path.Add(currentNode);
 
       List<Node> t = new List<Node>();
       t.Add(a);
 
       while(true) {
         Node n = getSmallestDistance(t);
+        t.Remove(n);
         foreach(Node v in n.connections) {
           double alt = n.totalDistance + n.distanceTo(v);
           if(alt < v.totalDistance || v.totalDistance == -1) {
