@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Testing_Ground_Area_51 {
-  class Person {
+  public class Person {
 
     public int x, y;
     public Node currentNode { get; set; }
+    public Node destinationNode { get; set; }
 
     public string Destination { get; set; }
     public List<Node> path = new List<Node>();
@@ -18,7 +19,7 @@ namespace Testing_Ground_Area_51 {
       this.y = y;
     }
 
-    public void calculatePath(Node dest) {
+    public void calculatePath() {
       //currentNode.resetPathfinding();
       Dictionary<Node, double> distances = new Dictionary<Node, double>();
       Dictionary<Node, Node> parents = new Dictionary<Node, Node>();
@@ -48,17 +49,17 @@ namespace Testing_Ground_Area_51 {
             t.Add(v);
           }
         }
-        if(n == dest) break;
+        if(n == destinationNode) break;
       }
 
       //Gets path backwards
       List<Node> temp = new List<Node>();
       bool keepGoing = true;
-      Node current = dest;
+      Node current = destinationNode;
       temp.Add(current);
       while(keepGoing) {
-        temp.Add(current = parents[current]);
         try {
+          temp.Add(current = parents[current]);
           if(parents[current] != null)
             keepGoing = true;
         } catch (Exception e) {

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,31 +19,61 @@ namespace Testing_Ground_Area_51 {
       Room r = new Room();
       r.loadFile();
       nodes = r.nodes;
-      Person jackson = new Person(0, 0);
-      jackson.currentNode = nodes[0];
+      Person[] people = new Person[10000];
+      Random rand = new Random();
+      for(int k = 0; k < people.Length;k++) {
+        people[k] = new Person(0, 0);
+        people[k].currentNode = nodes[rand.Next(0, 6)];
+        int dest = rand.Next(0,6);
+        while(nodes[dest] == people[k].currentNode) {
+          dest = rand.Next(0, 6);
+        }
+        people[k].destinationNode = nodes[rand.Next(0, 6)];
+      }
+
+      Thread[] threads = new Thread[people.Length];
+      for(int k = 0; k < threads.Length; k++) {
+        threads[k] = new Thread(people[k].calculatePath);
+      }
 
       DateTime start;
       TimeSpan time;
 
       start = DateTime.Now;
-      jackson.calculatePath(nodes[5]);
-      time = DateTime.Now - start;
-      label1.Text = "Nodes in the Path";
-      foreach(Node n in jackson.path) {
-        label1.Text += "\n" + n.toString();
+      for(int k = 0; k < threads.Length; k++) {
+        threads[k].Start();
       }
-      label1.Text += "\n" + String.Format("{0}.{1}", time.Seconds, time.Milliseconds.ToString().PadLeft(3, '0')); ;
-
-      start = DateTime.Now;
-      jackson.calculatePath(nodes[4]);
-      time = DateTime.Now - start;
-      label1.Text += "\nNodes in the Path 2";
-      foreach(Node n in jackson.path) {
-        label1.Text += "\n" + n.toString();
+      for(int k = 0; k < threads.Length;k++) {
+        threads[k].Join();
       }
-      label1.Text += "\n" + String.Format("{0}.{1}", time.Seconds, time.Milliseconds.ToString().PadLeft(3, '0')); ;
+      time = DateTime.Now - start;
+      label1.Text = "Took " + String.Format("{0}.{1}", time.Seconds, time.Milliseconds.ToString().PadLeft(3, '0'));
 
-      //label1.Text = "n1.Equals(30) " + nodes[0].Equals(nodes[20]); 
+      //saveFile(people);
+    }
+
+    public void saveFile(Person[] people) {
+      System.IO.FileStream file;
+      SaveFileDialog d = new SaveFileDialog();
+      d.Filter = "Text | *.txt";
+      d.FilterIndex = 1;
+      d.Title = "Save Data As";
+      d.OverwritePrompt = false;
+      if(d.ShowDialog() == DialogResult.OK)
+        file = (System.IO.FileStream)d.OpenFile();
+      else
+        return;
+      for(int k = 0; k < people.Count();k++) {
+        String x = "\n" + people[k].currentNode.toString() + " " + people[k].destinationNode.toString() + "\n";
+        byte[] line = new UTF8Encoding(true).GetBytes(x);
+        file.Write(line, 0, line.Length);
+        for(int j = 0; j < people[k].path.Count;j++) {
+          line = new UTF8Encoding(true).GetBytes(people[k].path[j].toString() + " \n");
+          file.Write(line, 0, line.Length);
+        }
+        line = new UTF8Encoding(true).GetBytes("\n\n");
+      }
+      file.Close();
     }
   }
 }
